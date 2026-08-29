@@ -1,0 +1,890 @@
+/* =========================================================
+   BACKOFEN REZEPTE – EXPERIENCE CARD
+   ========================================================= */
+
+.br-experience-tool {
+	width: 100%;
+	margin: 80px auto 55px;
+	padding: 0 12px;
+	font-family: inherit;
+	box-sizing: border-box;
+}
+
+.br-experience-tool *,
+.br-experience-tool *::before,
+.br-experience-tool *::after {
+	box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.br-experience-card {
+	position: relative;
+	width: 100%;
+	max-width: 1080px;
+	margin: 0 auto;
+	padding: 42px 42px 42px;
+
+	background:
+		radial-gradient(
+			circle at 90% 0%,
+			rgba(255, 143, 56, 0.09),
+			transparent 28%
+		),
+		linear-gradient(
+			145deg,
+			#fffdf9 0%,
+			#fff8f0 100%
+		);
+
+	border: 1px solid #f0ddc5;
+	border-radius: 28px;
+
+	box-shadow:
+		0 18px 55px rgba(64, 42, 25, 0.10),
+		0 4px 14px rgba(64, 42, 25, 0.05);
+
+	overflow: visible;
+}
+
+
+/* =========================================================
+   HEADER LAYOUT
+   Desktop:
+   Reserve space for Backo automatically.
+   ========================================================= */
+
+.br-experience-header {
+	position: relative;
+	z-index: 2;
+
+	padding-left: 205px;
+
+	margin-bottom: 34px;
+
+	min-height: 92px;
+}
+
+
+.br-experience-kicker {
+	display: inline-block;
+
+	margin-bottom: 8px;
+
+	color: #ef5a20;
+
+	font-size: 11px;
+	line-height: 1;
+	font-weight: 800;
+
+	letter-spacing: 1.5px;
+}
+
+
+.br-experience-header h2 {
+	margin: 0 0 9px;
+
+	color: #182b3d;
+
+	font-size: clamp(25px, 3vw, 35px);
+	line-height: 1.15;
+	font-weight: 800;
+}
+
+
+.br-experience-header p {
+	max-width: 650px;
+
+	margin: 0;
+
+	color: #596976;
+
+	font-size: 16px;
+	line-height: 1.55;
+}
+
+
+/* =========================================================
+   BACKO
+   Desktop
+   ========================================================= */
+
+.br-experience-backo {
+	position: absolute;
+
+	z-index: 10;
+
+	top: -58px;
+	left: 12px;
+
+	width: 195px;
+	height: auto;
+
+	object-fit: contain;
+
+	pointer-events: none;
+
+	filter:
+		drop-shadow(
+			0 12px 12px rgba(48, 30, 18, 0.15)
+		);
+}
+
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+
+.br-experience-section {
+	position: relative;
+
+	margin: 0 0 25px;
+
+	padding: 0;
+
+	border: 0;
+}
+
+
+.br-experience-section legend {
+	display: block;
+
+	width: 100%;
+
+	margin-bottom: 12px;
+	padding: 0;
+
+	color: #24384b;
+
+	font-size: 16px;
+	line-height: 1.35;
+	font-weight: 800;
+}
+
+
+.br-experience-section legend small,
+.br-field label small {
+	margin-left: 5px;
+
+	color: #8a969f;
+
+	font-size: 11px;
+	font-weight: 500;
+}
+
+
+/* =========================================================
+   OPTIONS
+   ========================================================= */
+
+.br-experience-options {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 9px;
+}
+
+
+.br-option {
+	position: relative;
+
+	display: inline-flex;
+	align-items: center;
+
+	min-height: 45px;
+
+	padding: 0 15px;
+
+	border: 1px solid #ead9c5;
+	border-radius: 12px;
+
+	background: #ffffff;
+
+	color: #34485a;
+
+	font-size: 14px;
+	font-weight: 650;
+
+	cursor: pointer;
+
+	transition:
+		border-color 0.18s ease,
+		background 0.18s ease,
+		transform 0.18s ease,
+		box-shadow 0.18s ease;
+}
+
+
+.br-option:hover {
+	border-color: #f18a51;
+
+	transform: translateY(-1px);
+
+	box-shadow:
+		0 5px 14px rgba(68, 43, 25, 0.06);
+}
+
+
+.br-option input {
+	position: absolute;
+
+	opacity: 0;
+
+	pointer-events: none;
+}
+
+
+.br-option:has(input:checked) {
+	border-color: #ef5a20;
+
+	background: #fff3e9;
+
+	color: #d94b17;
+
+	box-shadow:
+		0 4px 13px rgba(239, 90, 32, 0.10);
+}
+
+
+/* =========================================================
+   TWO COLUMNS
+   ========================================================= */
+
+.br-experience-two-columns {
+	display: grid;
+
+	grid-template-columns: 1fr 1fr;
+
+	gap: 15px;
+}
+
+
+/* =========================================================
+   FIELDS
+   ========================================================= */
+
+.br-field {
+	position: relative;
+}
+
+
+.br-field label {
+	display: block;
+
+	margin-bottom: 7px;
+
+	color: #34495b;
+
+	font-size: 14px;
+	font-weight: 750;
+}
+
+
+.br-field input[type="text"],
+.br-field input[type="number"],
+.br-field select,
+.br-field textarea {
+	width: 100%;
+
+	border: 1px solid #dfd0bf;
+	border-radius: 12px;
+
+	background: #ffffff;
+
+	color: #24384b;
+
+	font-family: inherit;
+	font-size: 14px;
+
+	outline: none;
+
+	transition:
+		border-color 0.18s ease,
+		box-shadow 0.18s ease;
+}
+
+
+.br-field input[type="text"],
+.br-field input[type="number"],
+.br-field select {
+	height: 47px;
+
+	padding: 0 13px;
+}
+
+
+.br-field textarea {
+	min-height: 105px;
+
+	padding: 13px 14px;
+
+	line-height: 1.55;
+
+	resize: vertical;
+}
+
+
+.br-field input:focus,
+.br-field select:focus,
+.br-field textarea:focus {
+	border-color: #ef7a3e;
+
+	box-shadow:
+		0 0 0 3px rgba(239, 90, 32, 0.10);
+}
+
+
+.br-field input::placeholder,
+.br-field textarea::placeholder {
+	color: #a4adb4;
+}
+
+
+/* =========================================================
+   UNIT
+   ========================================================= */
+
+.br-input-with-unit {
+	position: relative;
+}
+
+
+.br-input-with-unit input {
+	padding-right: 58px !important;
+}
+
+
+.br-input-with-unit span {
+	position: absolute;
+
+	top: 50%;
+	right: 14px;
+
+	transform: translateY(-50%);
+
+	color: #7c8992;
+
+	font-size: 13px;
+	font-weight: 700;
+
+	pointer-events: none;
+}
+
+
+/* =========================================================
+   RESULT
+   ========================================================= */
+
+.br-result-options {
+	display: grid;
+
+	grid-template-columns: repeat(3, 1fr);
+
+	gap: 11px;
+}
+
+
+.br-result-option {
+	position: relative;
+
+	display: block;
+
+	cursor: pointer;
+}
+
+
+.br-result-option input {
+	position: absolute;
+
+	opacity: 0;
+
+	pointer-events: none;
+}
+
+
+.br-result-content {
+	display: flex;
+
+	flex-direction: column;
+
+	min-height: 95px;
+
+	padding: 17px;
+
+	border: 1px solid #e5d5c2;
+	border-radius: 15px;
+
+	background: #ffffff;
+
+	transition:
+		border-color 0.18s ease,
+		background 0.18s ease,
+		box-shadow 0.18s ease,
+		transform 0.18s ease;
+}
+
+
+.br-result-option:hover .br-result-content {
+	transform: translateY(-1px);
+
+	box-shadow:
+		0 6px 17px rgba(63, 41, 25, 0.06);
+}
+
+
+.br-result-option input:checked + .br-result-content {
+	border-color: #ef5a20;
+
+	background: #fff4eb;
+
+	box-shadow:
+		0 5px 17px rgba(239, 90, 32, 0.10);
+}
+
+
+.br-result-content strong {
+	margin-bottom: 5px;
+
+	color: #263a4c;
+
+	font-size: 15px;
+	font-weight: 800;
+}
+
+
+.br-result-content small {
+	color: #697782;
+
+	font-size: 13px;
+	line-height: 1.45;
+}
+
+
+/* =========================================================
+   PROBLEM
+   ========================================================= */
+
+.br-problem-section {
+	padding: 20px;
+
+	border: 1px solid #f0d8c1;
+	border-radius: 17px;
+
+	background:
+		linear-gradient(
+			145deg,
+			#fffaf5,
+			#fff6ee
+		);
+}
+
+
+.br-problem-grid {
+	display: grid;
+
+	grid-template-columns: repeat(4, 1fr);
+
+	gap: 8px;
+}
+
+
+/* =========================================================
+   TEXT
+   ========================================================= */
+
+.br-text-field {
+	margin-bottom: 22px;
+}
+
+
+.br-character-count {
+	position: absolute;
+
+	right: 11px;
+	bottom: 8px;
+
+	color: #98a2a9;
+
+	font-size: 11px;
+
+	pointer-events: none;
+}
+
+
+/* =========================================================
+   SUBMIT
+   ========================================================= */
+
+.br-submit-area {
+	display: flex;
+
+	flex-direction: column;
+	align-items: center;
+
+	margin-top: 30px;
+}
+
+
+.br-experience-submit {
+	min-width: 240px;
+	min-height: 52px;
+
+	padding: 0 28px;
+
+	border: 0;
+	border-radius: 14px;
+
+	background:
+		linear-gradient(
+			135deg,
+			#ef5a20,
+			#f47735
+		);
+
+	color: #ffffff;
+
+	font-family: inherit;
+	font-size: 15px;
+	font-weight: 800;
+
+	cursor: pointer;
+
+	box-shadow:
+		0 8px 22px rgba(239, 90, 32, 0.22);
+
+	transition:
+		transform 0.18s ease,
+		box-shadow 0.18s ease,
+		opacity 0.18s ease;
+}
+
+
+.br-experience-submit:hover {
+	transform: translateY(-2px);
+
+	box-shadow:
+		0 11px 27px rgba(239, 90, 32, 0.27);
+}
+
+
+.br-experience-submit:disabled {
+	opacity: 0.65;
+
+	cursor: wait;
+
+	transform: none;
+}
+
+
+/* =========================================================
+   MESSAGES
+   ========================================================= */
+
+.br-experience-message {
+	margin: 17px 0;
+
+	padding: 13px 15px;
+
+	border-radius: 12px;
+
+	font-size: 14px;
+	line-height: 1.45;
+}
+
+
+.br-error-message {
+	border: 1px solid #efcfc5;
+
+	background: #fff4f1;
+
+	color: #a33e28;
+}
+
+
+/* =========================================================
+   SUCCESS
+   ========================================================= */
+
+.br-experience-success {
+	max-width: 650px;
+
+	margin: 15px auto 0;
+
+	padding: 35px 25px;
+
+	text-align: center;
+
+	border: 1px solid #ead8c4;
+	border-radius: 20px;
+
+	background: #ffffff;
+
+	box-shadow:
+		0 8px 24px rgba(63, 41, 25, 0.06);
+}
+
+
+.br-success-mark {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	width: 54px;
+	height: 54px;
+
+	margin: 0 auto 15px;
+
+	border-radius: 50%;
+
+	background: #edf7f0;
+
+	color: #3c8755;
+
+	font-size: 27px;
+	font-weight: 700;
+}
+
+
+.br-experience-success h3 {
+	margin: 0 0 8px;
+
+	color: #213649;
+
+	font-size: 25px;
+}
+
+
+.br-experience-success p {
+	max-width: 520px;
+
+	margin: 0 auto;
+
+	color: #65737d;
+
+	font-size: 15px;
+	line-height: 1.55;
+}
+
+
+.br-experience-id-box {
+	display: inline-flex;
+	flex-direction: column;
+
+	gap: 3px;
+
+	margin-top: 20px;
+	padding: 10px 18px;
+
+	border: 1px solid #ead8c4;
+	border-radius: 10px;
+
+	background: #fffaf5;
+}
+
+
+.br-experience-id-box span {
+	color: #8b969e;
+
+	font-size: 10px;
+
+	text-transform: uppercase;
+
+	letter-spacing: 0.8px;
+}
+
+
+.br-experience-id-box strong {
+	color: #ef5a20;
+
+	font-size: 15px;
+
+	letter-spacing: 0.5px;
+}
+
+
+/* =========================================================
+   HONEYPOT
+   ========================================================= */
+
+.br-experience-hp {
+	position: absolute !important;
+
+	left: -10000px !important;
+
+	width: 1px !important;
+	height: 1px !important;
+
+	overflow: hidden !important;
+}
+
+
+/* =========================================================
+   HIDDEN
+   ========================================================= */
+
+.br-experience-card [hidden] {
+	display: none !important;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+	.br-experience-card {
+		padding: 38px 25px 32px;
+	}
+
+	.br-experience-header {
+		padding-left: 175px;
+	}
+
+	.br-experience-backo {
+		width: 170px;
+		top: -50px;
+		left: 8px;
+	}
+
+	.br-result-options {
+		grid-template-columns: 1fr;
+	}
+
+	.br-problem-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+}
+
+
+/* =========================================================
+   MOBILE
+   Backo moves ABOVE the title.
+   No side-by-side overlap.
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+	.br-experience-tool {
+		margin: 105px auto 45px;
+		padding: 0 8px;
+	}
+
+	.br-experience-card {
+		padding: 92px 15px 25px;
+		border-radius: 21px;
+	}
+
+	.br-experience-backo {
+		width: 145px;
+
+		top: -82px;
+		left: 50%;
+
+		transform: translateX(-50%);
+	}
+
+	.br-experience-header {
+		padding-left: 0;
+
+		min-height: 0;
+
+		margin-bottom: 27px;
+
+		text-align: center;
+	}
+
+	.br-experience-kicker {
+		font-size: 10px;
+	}
+
+	.br-experience-header h2 {
+		font-size: 24px;
+	}
+
+	.br-experience-header p {
+		font-size: 14px;
+	}
+
+	.br-experience-two-columns {
+		grid-template-columns: 1fr;
+		gap: 14px;
+	}
+
+	.br-experience-options {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.br-option {
+		justify-content: center;
+
+		min-height: 43px;
+
+		padding: 0 7px;
+
+		text-align: center;
+
+		font-size: 12.5px;
+	}
+
+	.br-problem-section {
+		padding: 15px;
+	}
+
+	.br-problem-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.br-result-content {
+		min-height: 82px;
+		padding: 14px;
+	}
+
+	.br-result-content strong {
+		font-size: 14px;
+	}
+
+	.br-result-content small {
+		font-size: 12px;
+	}
+
+	.br-experience-submit {
+		width: 100%;
+		min-width: 0;
+	}
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+	.br-experience-tool {
+		margin-top: 92px;
+	}
+
+	.br-experience-card {
+		padding-top: 84px;
+	}
+
+	.br-experience-backo {
+		width: 128px;
+		top: -72px;
+	}
+
+	.br-experience-options {
+		grid-template-columns: 1fr;
+	}
+
+	.br-problem-grid {
+		grid-template-columns: 1fr;
+	}
+
+}
