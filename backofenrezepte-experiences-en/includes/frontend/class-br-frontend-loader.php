@@ -1,65 +1,144 @@
 <?php
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 /**
- * Exposes window.BackofenRezepteExperience on singular recipe pages
- * only. Does NOT enqueue or redesign the existing experience card —
- * that markup/CSS/JS is expected to already live in the theme/page
- * and simply reads this global.
+ * Backofenrezepte Experience Frontend Loader
+ *
+ * Loads the Experience Card CSS/JS automatically
+ * and exposes the recipe-specific REST configuration.
  */
 class BR_Frontend_Loader {
 
 	public static function init() {
-		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'maybe_localize' ) );
+
+		add_action(
+			'wp_enqueue_scripts',
+			array( __CLASS__, 'enqueue_assets' )
+		);
+
 	}
 
-	public static function maybe_localize() {
+
+	public static function enqueue_assets() {
+
 		if ( ! is_singular() ) {
 			return;
 		}
 
+
 		global $post;
+
 		if ( ! $post ) {
 			return;
 		}
 
+
 		/**
-		 * Filters whether the experience card data should be exposed
-		 * on this post. Defaults to true for any published singular
-		 * post/page; site owners can narrow this to a recipe CPT.
+		 * Allow the site to restrict the Experience Card
+		 * to specific post types if needed.
 		 */
-		$should_localize = apply_filters( 'br_exp_should_localize', true, $post );
-		if ( ! $should_localize ) {
+		$should_load = apply_filters(
+			'br_exp_should_localize',
+			true,
+			$post
+		);
+
+
+		if ( ! $should_load ) {
 			return;
 		}
 
+
+		/**
+		 * ----------------------------------------------------
+		 * CSS
+		 * ----------------------------------------------------
+		 */
+
+		wp_enqueue_style(
+			'br-experience',
+			BR_EXP_PLUGIN_URL . 'assets/css/experience.css',
+			array(),
+			BR_EXP_VERSION
+		);
+
+
+		/**
+		 * ----------------------------------------------------
+		 * JavaScript
+		 * ----------------------------------------------------
+		 */
+
+		wp_enqueue_script(
+			'br-experience',
+			BR_EXP_PLUGIN_URL . 'assets/js/experience.js',
+			array(),
+			BR_EXP_VERSION,
+			true
+		);
+
+
+		/**
+		 * ----------------------------------------------------
+		 * Frontend configuration
+		 * ----------------------------------------------------
+		 */
+
 		$settings = BR_Helpers::settings();
 
-		// A tiny inline handle just to attach the localized data to;
-		// does not load any additional JS/CSS file of its own.
-		wp_register_script( 'br-exp-data', false, array(), BR_EXP_VERSION, true );
-		wp_enqueue_script( 'br-exp-data' );
 
 		wp_localize_script(
-			'br-exp-data',
+			'br-experience',
 			'BackofenRezepteExperience',
 			array(
-				'recipeId'   => $post->ID,
-				'restUrl'    => esc_url_raw( rest_url( 'backofenrezepte/v1/experiences' ) ),
-				'nonce'      => wp_create_nonce( 'wp_rest' ),
+
+				'recipeId' =>
+					(int) $post->ID,
+
+				'restUrl' =>
+					esc_url_raw(
+						rest_url(
+							'backofenrezepte/v1/experiences'
+						)
+					),
+
+				'nonce' =>
+					wp_create_nonce(
+						'wp_rest'
+					),
+
 				'vocabulary' => array(
-					'ovenTypes' => BR_Vocabulary::oven_types(),
-					'results'   => BR_Vocabulary::results(),
-					'problems'  => BR_Vocabulary::problems(),
-					'forms'     => BR_Vocabulary::forms(),
+
+					'ovenTypes' =>
+						BR_Vocabulary::oven_types(),
+
+					'results' =>
+						BR_Vocabulary::results(),
+
+					'problems' =>
+						BR_Vocabulary::problems(),
+
+					'forms' =>
+						BR_Vocabulary::forms(),
+
 				),
-				'i18n'       => array(
-					'success' => BR_Helpers::success_message(),
-					'error'   => BR_Helpers::generic_error_message(),
+
+				'i18n' => array(
+
+					'success' =>
+						BR_Helpers::success_message(),
+
+					'error' =>
+						BR_Helpers::generic_error_message(),
+
 				),
+
 			)
 		);
+
 	}
+
 }
